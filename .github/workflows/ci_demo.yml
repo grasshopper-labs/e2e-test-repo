@@ -10,6 +10,9 @@ jobs:
     name: mongodb dump and re-install
     runs-on: ubuntu-latest
     steps:
+      - name: 
+        run: echo "hello world"
+        
       - name: Set up MongoDB CLI
         run: |
           sudo apt-get install gnupg
