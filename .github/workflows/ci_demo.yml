@@ -7,8 +7,8 @@ on:
 
 jobs:
   mongodb-dump-and-reinstall:
-    name: mongodb dump and re-install
     runs-on: ubuntu-latest
+
     steps:
       - name: Set up MongoDB CLI
         run: |
@@ -16,7 +16,7 @@ jobs:
           wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
           echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
           sudo apt-get update
-          sudo apt-get install -y mongocli
+          sudo apt-get install -y mongodb-org-tools
       
       - name: Dump DBs
         env:  
@@ -24,5 +24,5 @@ jobs:
           MONGODB_USER: ${{ secrets.MONGODB_USER }}
           MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
         run: |
-          mongodump --uri="$MONGODB_URI" --username="$MONGODB_USER" --password="$MONGODB_PASSWORD" --out=dump_main_db/
+          mongodump --uri="$MONGODB_URI" --username="$MONGODB_USER" --password="$MONGODB_PASSWORD" --out=dump_drl_db/
           
