@@ -3,7 +3,7 @@ name: GitHub Actions - CI Demo
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   mongodb-dump-and-reinstall:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: 
         run: echo "hello world"
-        
+
       - name: Set up MongoDB CLI
         run: |
           sudo apt-get install gnupg
