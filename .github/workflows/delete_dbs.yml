@@ -1,0 +1,26 @@
+name: Delete DBs
+
+on: workflow_dispatch
+
+env:  
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
+  MONGODB_USER: ${{ secrets.MONGODB_USER }}
+  MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+
+
+jobs:
+  delete-dbs:
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: Set up MongoDB CLI
+          run: |
+            sudo apt-get install gnupg
+            wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+            echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+            sudo apt-get update
+            sudo apt-get install -y mongodb-mongosh
+
+        - name: Delete DBs
+          run: |
+            mongosh --eval "use e2e-drl" --eval "db.dropDatabase()"

@@ -23,8 +23,8 @@ jobs:
       
       - name: Dump DBs
         run: |
-          mongodump --uri="${{ env.MONGODB_URI }}/qa-drl" --db=qa-drl --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_drl_db/
+          mongodump --uri="${{ env.MONGODB_URI }}/${{ vars.DB_NAME }}" --db=qa-drl --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_drl_db/
           
       - name: Restore DBs
         run: |
-          mongorestore --nsFrom "qa-drl.*" --nsTo "e2e-drl.*" dump_drl_db/
+          mongorestore --nsFrom "${{ vars.DB_NAME }}.*" --nsTo "e2e-drl.*" dump_drl_db/
