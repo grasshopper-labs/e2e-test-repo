@@ -23,7 +23,7 @@ jobs:
       
       - name: Dump DBs
         run: |
-          mongodump --uri="${{ env.MONGODB_URI }}/${{ vars.DB_NAME }}" --db=qa-drl --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_drl_db/
+          mongodump --uri="${{ env.MONGODB_URI }}/${{ vars.DB_NAME }}" --db=${{ vars.DB_NAME }} --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_drl_db/
           
       - name: Restore DBs
         run: |
