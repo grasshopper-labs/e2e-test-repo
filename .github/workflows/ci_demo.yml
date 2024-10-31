@@ -1,9 +1,6 @@
 name: GitHub Actions - CI Demo
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 
 env:  
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
@@ -26,5 +23,5 @@ jobs:
       
       - name: Dump DBs
         run: |
-          mongodump --uri="${{ env.MONGODB_URI }}/qa-drl" --username="$MONGODB_USER" --password="$MONGODB_PASSWORD" --out=dump_drl_db/
+          mongodump --uri="${{ env.MONGODB_URI }}/qa-drl" --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_drl_db/
           
