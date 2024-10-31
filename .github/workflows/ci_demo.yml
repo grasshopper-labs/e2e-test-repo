@@ -3,9 +3,9 @@ name: GitHub Actions - CI Demo
 on: workflow_dispatch
 
 env:  
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          MONGODB_USER: ${{ secrets.MONGODB_USER }}
-          MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
+  MONGODB_USER: ${{ secrets.MONGODB_USER }}
+  MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
 
 
 jobs:
@@ -23,5 +23,8 @@ jobs:
       
       - name: Dump DBs
         run: |
-          mongodump --uri="${{ env.MONGODB_URI }}/qa-drl" --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_drl_db/
+          mongodump --uri="${{ env.MONGODB_URI }}/qa-drl" --db=qa-drl --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_drl_db/
           
+      - name: Restore DBs
+        run: |
+          mongorestore --nsFrom "qa-drl.*" --nsTo "e2e-drl.*" dump_drl_db/
