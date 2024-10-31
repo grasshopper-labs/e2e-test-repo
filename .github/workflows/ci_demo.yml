@@ -26,5 +26,5 @@ jobs:
       
       - name: Dump DBs
         run: |
-          mongodump --uri="$MONGODB_URI" --username="$MONGODB_USER" --password="$MONGODB_PASSWORD" --out=dump_drl_db/
+          mongodump --uri="${{ env.MONGODB_URI }}/qa-drl" --username="$MONGODB_USER" --password="$MONGODB_PASSWORD" --out=dump_drl_db/
           
