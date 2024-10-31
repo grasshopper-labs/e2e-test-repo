@@ -27,4 +27,4 @@ jobs:
           
       - name: Restore DBs
         run: |
-          mongorestore --nsFrom "${{ vars.DB_NAME }}.*" --nsTo "e2e-drl.*" dump_drl_db/
+          mongorestore --uri="${{ env.MONGODB_URI }}" --nsFrom "${{ vars.DB_NAME }}.*" --nsTo "e2e-drl.*" dump_drl_db/
