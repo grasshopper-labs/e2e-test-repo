@@ -4,6 +4,7 @@ let db = null;
 
 async function initDb(dbName) {
     if (db) {
+        console.log('MongoDB connection already initialized');
         return db;
     }
 
@@ -11,6 +12,7 @@ async function initDb(dbName) {
         const mongoClient = await MongoClient.connect(process.env.MONGODB_URI);
         db = mongoClient.db(dbName);
         console.log('Connected to MongoDB successfully.');
+        return db
     } catch (error) {
         console.error(error);
     }
