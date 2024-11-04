@@ -1,16 +1,12 @@
-const { initDb } = require('./db')
-const {updateConfig, getConfig} = require("./controllers/configCtrl");
-const {updateConfigModel} = require("./models/Config");
+const { mongooseClient } = require('./db')
+const {updateConfigForDB} = require("./controllers/configCtrl");
 require('dotenv').config()
 
 
 async function main() {
-    const db = await initDb(process.env.DB_NAME)
+    const connection = await mongooseClient(process.env.MONGODB_URI);
 
-    await updateConfig(db, updateConfigModel())
-
-    const conf = await getConfig()
-    console.log(conf)
+    await updateConfigForDB(connection, "e2e-drl");
 }
 
 main()

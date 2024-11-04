@@ -1,0 +1,12 @@
+{
+  "e2e-drl": {
+    "app_id": "e2e-drl-2",
+    "company.name": "e2e-drl-2",
+    "company.display_name": "E2E-DRL",
+    "company.public_root": "https://testing-e2e.com",
+    "COMPANY_NAME": "E2E-DRL",
+    "PUBLIC_ROOT": "https://testing-e2e.com"
+  },
+  "e2e-p1": {},
+  "e2e-p2": {}
+}

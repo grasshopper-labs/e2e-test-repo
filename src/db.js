@@ -1,28 +1,26 @@
-const { MongoClient } = require('mongodb');
+const mongoose = require("mongoose");
 
-let db = null;
 
-async function initDb(dbName) {
-    if (db) {
-        console.log('MongoDB connection already initialized');
-        return db;
-    }
-
+exports.mongooseClient = async (uri, options ={}) => {
     try {
-        const mongoClient = await MongoClient.connect(process.env.MONGODB_URI);
-        db = mongoClient.db(dbName);
-        console.log('Connected to MongoDB successfully.');
-        return db
+        mongoose.set('strictQuery', false);
+
+        const conn = await mongoose.createConnection(uri, options);
+        console.log("MongoDB connection succeeded!")
+        return conn
     } catch (error) {
-        console.error(error);
+        console.error("MongoDB primary connection failed, " + error);
+        throw new Error("MongoDB connection failed!");
     }
 }
 
-function getDb() {
-    if (!db) {
-        throw new Error('DB connection is not initialized!');
-    }
-    return db;
-}
 
-module.exports = { initDb, getDb };
+exports.changeDb = (connection, dbName) => {
+    try {
+        const db = connection.useDb(dbName)
+        console.log(`DB changed to ${dbName}`)
+        return db
+    } catch (err) {
+        console.error('failed to change DB: ', err);
+    }
+}
