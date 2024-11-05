@@ -24,3 +24,10 @@ exports.changeDb = (connection, dbName) => {
         console.error('failed to change DB: ', err);
     }
 }
+
+exports.checkIfDbExists = async (conn, dbName) => {
+    const dbs = await conn.listDatabases().then((dbs) => {
+        return dbs['databases'].map((db) => db.name) }
+    );
+    return (dbs.includes(dbName))
+}
