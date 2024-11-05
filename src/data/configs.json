@@ -7,7 +7,10 @@
     "COMPANY_NAME": "E2E-DRL",
     "PUBLIC_ROOT": "https://placeholder.com",
     "globalSync.url": "https://placeholder.com",
-    "globalSync.is_master": true
+    "globalSync.is_master": true,
+    "globalSync.rabbitmq.connection_url": "amqps://placeholder@zebra.rmq.cloudamqp.com/",
+    "globalSync.rabbitmq.exchange_name": "exchange placeholder",
+    "globalSync.rabbitmq.master_queue": "master queue placeholder"
   },
   "e2e-p1": {
     "app_id": "e2e-p1",
