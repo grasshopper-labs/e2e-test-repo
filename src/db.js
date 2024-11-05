@@ -14,20 +14,24 @@ exports.mongooseClient = async (uri, options ={}) => {
     }
 }
 
-
-exports.changeDb = (connection, dbName) => {
-    try {
-        const db = connection.useDb(dbName)
-        console.log(`DB changed to ${dbName}`)
-        return db
-    } catch (err) {
-        console.error('failed to change DB: ', err);
-    }
-}
-
-exports.checkIfDbExists = async (conn, dbName) => {
+checkIfDbExists = async (conn, dbName) => {
     const dbs = await conn.listDatabases().then((dbs) => {
         return dbs['databases'].map((db) => db.name) }
     );
     return (dbs.includes(dbName))
+}
+
+
+exports.changeDb = async (connection, dbName) => {
+    try {
+        if (await checkIfDbExists(connection, dbName)) {
+            const db = connection.useDb(dbName)
+            console.log(`DB changed to ${dbName}`)
+            return db
+        } else {
+            throw new Error(`DB with the name: ${dbName} not found!`)
+        }
+    } catch (err) {
+        console.error('failed to change DB: ', err);
+    }
 }
