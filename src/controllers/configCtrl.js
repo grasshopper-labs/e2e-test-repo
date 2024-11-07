@@ -13,7 +13,6 @@ const updateConfig = async (db, updatedFields) => {
 
 const updateConfigFields = (dbName) => {
     const config = configs[dbName]
-    console.log(config)
     updateUrls(config, dbName)
     updateRabbitExchangeData(config)
     return config
