@@ -1,6 +1,9 @@
 require('dotenv').config()
 
+
 const fieldsWithUrls = ["company.public_root", "PUBLIC_ROOT", "globalSync.url"]
+exports.appIds = ["qa", "qa-partner1", "qa-partner2"]
+
 
 const getUrlByDbName = (dbName) => {
     const envVarName = `${dbName.toUpperCase().replace('-','_')}_URL`
@@ -41,3 +44,23 @@ exports.updateRabbitExchangeData = (confObj) => {
     }
     console.log("If you see this log then this conf file is for no rabbit master")
 }
+
+exports.mapAppIds = (appId) => {
+    switch (appId) {
+        case 'qa':
+            return 'e2e-drl'
+        case 'qa-partner1':
+            return 'e2e-p1'
+        case 'qa-partner2':
+            return 'e2e-p2'
+        default:
+            throw new Error(`App id ${appId} not found`)
+    }
+};
+
+exports.getUrlByAppId = (appId) => {
+    if (appId.toString().toLowerCase() === 'qa') { return process.env.E2E_DRL_URL }
+    else if (appId.includes('1')) { return process.env.E2E_P1_URL }
+    else if (appId.includes('2')) { return process.env.E2E_P2_URL }
+    else { throw new Error(`invalid appId ${appId}`) }
+};
