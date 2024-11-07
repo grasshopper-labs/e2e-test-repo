@@ -1,5 +1,5 @@
-const {changeDb} = require("../db");
-const {appIds, mapAppIds, getUrlByAppId} = require("../utils");
+const {mapAppIds, getUrlByAppId} = require("../utils");
+const {appIds} = require("../common");
 
 
 const getPartners = async (db) => {
@@ -41,9 +41,8 @@ const updatePartnersInDB = async (db, partners) => {
     await db.collection("partner").bulkWrite(query)
 }
 
-exports.updatePartners = async (conn, dbName) => {
+exports.updatePartners = async (db, dbName) => {
     try {
-        const db = await changeDb(conn, dbName);
         const partners = await getPartners(db)
         const partnersMap = projectPartnerData(partners)
         await updatePartnersInDB(db, partnersMap)
