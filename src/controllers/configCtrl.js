@@ -1,5 +1,4 @@
 const configs = require('../data/configs.json');
-const {changeDb } = require("../db");
 const {updateUrls, updateRabbitExchangeData} = require("../utils");
 
 exports.getConfig = async (db) => {
@@ -18,9 +17,8 @@ const updateConfigFields = (dbName) => {
     return config
 }
 
-exports.updateConfigForDB = async (conn, dbName) => {
+exports.updateConfigForDB = async (db, dbName) => {
     try {
-        const db = await changeDb(conn, dbName);
         const newConfig = updateConfigFields(dbName)
         await updateConfig(db, newConfig)
         console.log(`Config updated to ${dbName}`)

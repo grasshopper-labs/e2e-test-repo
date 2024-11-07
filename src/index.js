@@ -1,14 +1,21 @@
-const { mongooseClient } = require('./db')
+const { mongooseClient, changeDb} = require('./db')
 const {updateConfigForDB} = require("./controllers/configCtrl");
 const {updatePartners} = require("./controllers/partnerCtrl");
+const {deleteRetailers} = require("./controllers/retailerCtrl");
 require('dotenv').config()
 
+
+async function updateDB(connection, dbName) {
+    const db = await changeDb(connection, dbName);
+    await updateConfigForDB(db, dbName);
+    await updatePartners(db, dbName);
+    await deleteRetailers(db, dbName);
+}
 
 async function main() {
     const connection = await mongooseClient(process.env.MONGODB_URI);
 
-    await updateConfigForDB(connection, 'e2e-drl');
-    await updatePartners(connection, 'e2e-drl')
+    await updateDB(connection, 'e2e-drl');
 }
 
 main()
