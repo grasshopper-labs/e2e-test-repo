@@ -2,6 +2,7 @@ const { mongooseClient, changeDb} = require('./db')
 const {updateConfigForDB} = require("./controllers/configCtrl");
 const {updatePartners} = require("./controllers/partnerCtrl");
 const {deleteRetailers} = require("./controllers/retailerCtrl");
+const {deleteConsignees} = require("./controllers/consigneeCtrl");
 require('dotenv').config()
 
 
@@ -10,6 +11,7 @@ async function updateDB(connection, dbName) {
     await updateConfigForDB(db, dbName);
     await updatePartners(db, dbName);
     await deleteRetailers(db, dbName);
+    await deleteConsignees(db, dbName);
 }
 
 async function main() {
