@@ -22,5 +22,14 @@
     "globalSync.url": "https://placeholder.com",
     "globalSync.is_master": false
   },
-  "e2e-p2": {}
+  "e2e-p2": {
+    "app_id": "e2e-p2",
+    "company.name": "e2e-p2",
+    "company.display_name": "E2E-PARTNER2",
+    "company.public_root": "https://placeholder.com",
+    "COMPANY_NAME": "E2E-P2",
+    "PUBLIC_ROOT": "https://placeholder.com",
+    "globalSync.url": "https://placeholder.com",
+    "globalSync.is_master": false
+  }
 }
