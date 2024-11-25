@@ -43,4 +43,4 @@ jobs:
 
       - name: Restore P2 DB
         run: |
-          mongorestore --uri="${{ env.MONGODB_URI }}" --nsFrom "${{ vars.P2_DB_NAME }}.*" --nsTo "e2e-p1.*" dump_p2_db/
+          mongorestore --uri="${{ env.MONGODB_URI }}" --nsFrom "${{ vars.P2_DB_NAME }}.*" --nsTo "e2e-p2.*" dump_p2_db/
