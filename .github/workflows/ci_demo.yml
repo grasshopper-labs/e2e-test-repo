@@ -21,10 +21,26 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y mongodb-org-tools
       
-      - name: Dump DBs
+      - name: Dump main DB
         run: |
-          mongodump --uri="${{ env.MONGODB_URI }}/${{ vars.DB_NAME }}" --db=${{ vars.DB_NAME }} --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_drl_db/
+          mongodump --uri="${{ env.MONGODB_URI }}/${{ vars.MAIN_DB_NAME }}" --db=${{ vars.MAIN_DB_NAME }} --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_drl_db/
           
-      - name: Restore DBs
+      - name: Restore main DB
         run: |
-          mongorestore --uri="${{ env.MONGODB_URI }}" --nsFrom "${{ vars.DB_NAME }}.*" --nsTo "e2e-drl.*" dump_drl_db/
+          mongorestore --uri="${{ env.MONGODB_URI }}" --nsFrom "${{ vars.MAIN_DB_NAME }}.*" --nsTo "e2e-drl.*" dump_drl_db/
+
+      - name: Dump P1 DB
+        run: |
+          mongodump --uri="${{ env.MONGODB_URI }}/${{ vars.P1_DB_NAME }}" --db=${{ vars.P1_DB_NAME }} --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_p1_db/
+
+      - name: Restore P1 DB
+        run: |
+          mongorestore --uri="${{ env.MONGODB_URI }}" --nsFrom "${{ vars.P1_DB_NAME }}.*" --nsTo "e2e-p1.*" dump_p1_db/
+
+      - name: Dump P2 DB
+        run: |
+          mongodump --uri="${{ env.MONGODB_URI }}/${{ vars.P2_DB_NAME }}" --db=${{ vars.P2_DB_NAME }} --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_p2_db/
+
+      - name: Restore P2 DB
+        run: |
+          mongorestore --uri="${{ env.MONGODB_URI }}" --nsFrom "${{ vars.P2_DB_NAME }}.*" --nsTo "e2e-p2.*" dump_p2_db/

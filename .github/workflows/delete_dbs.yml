@@ -24,3 +24,5 @@ jobs:
         - name: Delete DBs
           run: |
             mongosh "${{ env.MONGODB_URI }}" --eval "use e2e-drl" --eval "db.dropDatabase()"
+            mongosh "${{ env.MONGODB_URI }}" --eval "use e2e-p1" --eval "db.dropDatabase()"
+            mongosh "${{ env.MONGODB_URI }}" --eval "use e2e-p2" --eval "db.dropDatabase()"
