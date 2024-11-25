@@ -17,8 +17,10 @@
     "company.name": "e2e-p1",
     "company.display_name": "E2E-PARTNER1",
     "company.public_root": "https://placeholder.com",
+    "company.public_site": "https://placeholder.com",
     "COMPANY_NAME": "E2E-P1",
     "PUBLIC_ROOT": "https://placeholder.com",
+    "public_site": "https://placeholder.com",
     "globalSync.url": "https://placeholder.com",
     "globalSync.is_master": false
   },
@@ -27,8 +29,10 @@
     "company.name": "e2e-p2",
     "company.display_name": "E2E-PARTNER2",
     "company.public_root": "https://placeholder.com",
+    "company.public_site": "https://placeholder.com",
     "COMPANY_NAME": "E2E-P2",
     "PUBLIC_ROOT": "https://placeholder.com",
+    "public_site": "https://placeholder.com",
     "globalSync.url": "https://placeholder.com",
     "globalSync.is_master": false
   }

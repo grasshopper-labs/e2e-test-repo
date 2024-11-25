@@ -4,6 +4,7 @@ const {updatePartners} = require("./controllers/partnerCtrl");
 const {deleteRetailers} = require("./controllers/retailerCtrl");
 const {deleteConsignees} = require("./controllers/consigneeCtrl");
 const {deleteDeliveriesQuestionnaires, deleteDimensionalizers, deleteInventory, deleteManifests, deleteOrders} = require("./controllers/collectionCleanerCtrl");
+const {dbsNames} = require("./common");
 require('dotenv').config()
 
 
@@ -25,7 +26,9 @@ async function updateDB(connection, dbName) {
 async function main() {
     const connection = await mongooseClient(process.env.MONGODB_URI);
 
-    await updateDB(connection, 'e2e-drl');
+    for (let dbName of dbsNames) {
+        await updateDB(connection, dbName);
+    }
 }
 
 main()
