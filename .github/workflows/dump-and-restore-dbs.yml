@@ -20,7 +20,7 @@ jobs:
           token: ${{ secrets.ACTION_REPO_PAT }}
 
       - name: Install mongodb org tools
-        uses: grasshopper-labs/mongodb-org-tools@latest
+        uses: ./mongodb-org-tools@latest
 
       - name: Dump qa-drl db
         run: |
