@@ -1,4 +1,4 @@
-name: GitHub Actions - CI Demo
+name: Dump and restore dbs
 
 on: workflow_dispatch
 
