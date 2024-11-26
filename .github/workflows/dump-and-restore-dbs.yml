@@ -21,7 +21,7 @@ jobs:
           path: .github/mongodb-org-tools
 
       - name: Install mongodb org tools
-        uses: ./.github/mongodb-org-tools
+        uses: mongodb-org-tools@latest
 
       - name: Dump qa-drl db
         run: |
