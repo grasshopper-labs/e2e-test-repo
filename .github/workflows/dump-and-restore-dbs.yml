@@ -15,9 +15,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          repository: grasshopper-labs/mongodb-org-tools
+          token: ${{ secrets.ACTION_REPO_PAT }}
 
       - name: Install mongodb org tools
-        run: grasshopper-labs/mongodb-org-tools@latest
+        uses: ./ mongodb-org-tools@latest
 
       - name: Dump qa-drl db
         run: |
