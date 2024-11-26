@@ -26,3 +26,41 @@ jobs:
       - name: Restore e2e-drl db
         run: |
           mongorestore --uri="${{ env.MONGODB_URI }}" --nsFrom "${{ vars.MAIN_DB_NAME }}.*" --nsTo "e2e-drl.*" dump_drl_db/
+
+
+  dump-and-restore-partner-1-db:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install mongodb org tools
+        uses: grasshopper-labs/mongodb-org-tools@v1.0.2
+
+      - name: Dump P1 DB
+        run: |
+          mongodump --uri="${{ env.MONGODB_URI }}/${{ vars.P1_DB_NAME }}" --db=${{ vars.P1_DB_NAME }} --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_p1_db/
+
+      - name: Restore P1 DB
+        run: |
+          mongorestore --uri="${{ env.MONGODB_URI }}" --nsFrom "${{ vars.P1_DB_NAME }}.*" --nsTo "e2e-p1.*" dump_p1_db/
+  
+
+  dump-and-restore-partner-2-db:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install mongodb org tools
+        uses: grasshopper-labs/mongodb-org-tools@v1.0.2
+
+      - name: Dump P2 DB
+        run: |
+          mongodump --uri="${{ env.MONGODB_URI }}/${{ vars.P2_DB_NAME }}" --db=${{ vars.P2_DB_NAME }} --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_p2_db/
+
+      - name: Restore P2 DB
+        run: |
+          mongorestore --uri="${{ env.MONGODB_URI }}" --nsFrom "${{ vars.P2_DB_NAME }}.*" --nsTo "e2e-p2.*" dump_p2_db/
