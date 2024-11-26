@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install mongodb org tools
-        uses: grasshopper-labs/mongodb-org-tools@v1
+        uses: grasshopper-labs/mongodb-org-tools@1.0.0
 
       - name: Dump qa-drl db
         run: |
