@@ -1,0 +1,28 @@
+name: GitHub Actions - CI Demo
+
+on: workflow_dispatch
+
+env:
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
+  MONGODB_USER: ${{ secrets.MONGODB_USER }}
+  MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+
+
+jobs:
+  dump-and-restore-drl-db:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        run: actions/checkout@v4
+
+      - name: Install mongodb org tools
+        run: grasshopper-labs/mongodb-org-tools@latest
+
+      - name: Dump qa-drl db
+        run: |
+          mongodump --uri="${{ env.MONGODB_URI }}/${{ vars.MAIN_DB_NAME }}" --db=${{ vars.MAIN_DB_NAME }} --username="${{ env.MONGODB_USER }}" --password="${{ env.MONGODB_PASSWORD }}" --out=dump_drl_db/
+
+      - name: Restore e2e-drl db
+        run: |
+          mongorestore --uri="${{ env.MONGODB_URI }}" --nsFrom "${{ vars.MAIN_DB_NAME }}.*" --nsTo "e2e-drl.*" dump_drl_db/
