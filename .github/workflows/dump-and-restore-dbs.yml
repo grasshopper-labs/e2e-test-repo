@@ -18,9 +18,10 @@ jobs:
         with:
           repository: grasshopper-labs/mongodb-org-tools
           token: ${{ secrets.ACTION_REPO_PAT }}
+          path: .github/mongodb-org-tools
 
       - name: Install mongodb org tools
-        uses: ./mongodb-org-tools
+        uses: ./.github/mongodb-org-tools
 
       - name: Dump qa-drl db
         run: |
