@@ -30,8 +30,9 @@ const loadMasterConfig = async () => {
             }
         });
         if (!response.ok) {
-            throw new Error(`Failed to fetch master config ${response.status}`);
+             console.error(`Failed to fetch master config ${response.status}`);
         }
+        console.log("Master config fetched successfully")
         return await response.json();
     } catch (err) {
         console.error(`failed to fetch main config ${err}`);
@@ -53,6 +54,7 @@ const updateExistingConfigWithMissingKeys = async (db, missingKeys, masterConfig
         newFieldsForConfig[key] = masterConfig[key];
     });
     await updateConfig(db, newFieldsForConfig);
+    console.log(`The new fields added to config: ${newFieldsForConfig}`);
 }
 
 const compareConfigToMaster = async (db) => {
