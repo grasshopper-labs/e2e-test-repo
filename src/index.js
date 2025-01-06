@@ -26,8 +26,13 @@ async function updateDB(connection, dbName) {
 async function main() {
     const connection = await mongooseClient(process.env.MONGODB_URI);
 
-    for (let dbName of dbsNames) {
-        await updateDB(connection, dbName);
+    if (process.env.NODE_ENV === 'production') {
+        for (let dbName of dbsNames) {
+            await updateDB(connection, dbName);
+        }
+    } else {
+        const db = await changeDb(connection, 'e2e-drl');
+        await updateConfigForDB(db);
     }
 }
 
