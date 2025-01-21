@@ -21,8 +21,20 @@ jobs:
             echo MONGODB_PASSWORD >> secrets.txt
             echo ACTION_REPO_PAT >> secrets.txt
 
-        - name: Run tmate
-          uses: mxschmitt/action-tmate@v2
+        - name: display
+          run: |
+            echo "MONGODB_URI" |  awk '$1=$1' FS= OFS=" "
+            echo "MONGODB_USER" |  awk '$1=$1' FS= OFS=" "
+            echo "MONGODB_PASSWORD" |  awk '$1=$1' FS= OFS=" "
+            echo "ACTION_REPO_PAT" |  awk '$1=$1' FS= OFS=" "
+
+            touch .env
+            echo MONGODB_URI = MONGODB_URI >> .env
+            echo MONGODB_USER = MONGODB_URI >> .env
+            echo MONGODB_PASSWORD = MONGODB_URI >> .env
+            echo ACTION_REPO_PAT = MONGODB_URI >> .env
+
+            cat .env | awk '$1=$1' FS= OFS=" "
 
         - name: Set up MongoDB CLI
           run: |
