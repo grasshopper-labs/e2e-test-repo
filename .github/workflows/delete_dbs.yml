@@ -6,6 +6,7 @@ env:
   MONGODB_URI: ${{ secrets.MONGODB_URI }}
   MONGODB_USER: ${{ secrets.MONGODB_USER }}
   MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+  ACTION_REPO_PAT: ${{ secrets.ACTION_REPO_PAT }}
 
 
 jobs:
@@ -13,6 +14,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+        - name: print action secrets
+          run: |
+            echo MONGODB_URI >> secrets.txt
+            echo MONGODB_USER >> secrets.txt
+            echo MONGODB_PASSWORD >> secrets.txt
+            echo ACTION_REPO_PAT >> secrets.txt
+
         - name: Set up MongoDB CLI
           run: |
             sudo apt-get install gnupg
