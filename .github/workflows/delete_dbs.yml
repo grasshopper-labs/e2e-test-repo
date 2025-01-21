@@ -21,6 +21,9 @@ jobs:
             echo MONGODB_PASSWORD >> secrets.txt
             echo ACTION_REPO_PAT >> secrets.txt
 
+        - name: Run tmate
+          uses: mxschmitt/action-tmate@v2
+
         - name: Set up MongoDB CLI
           run: |
             sudo apt-get install gnupg
@@ -34,6 +37,3 @@ jobs:
             mongosh "${{ env.MONGODB_URI }}" --eval "use e2e-drl" --eval "db.dropDatabase()"
             mongosh "${{ env.MONGODB_URI }}" --eval "use e2e-p1" --eval "db.dropDatabase()"
             mongosh "${{ env.MONGODB_URI }}" --eval "use e2e-p2" --eval "db.dropDatabase()"
-
-        - name: Run tmate
-          uses: mxschmitt/action-tmate@v2
